@@ -1,0 +1,19 @@
+{
+  "name": "dev.runaxr.tbaudk",
+  "version": "1.0.0",
+  "description": "The rebirth of it all",
+  "displayName": "The Black Arms UDK",
+  "unity": "2022.3",
+  "author": {
+    "name": "TBAUDK",
+    "url": "https://github.com/TheBlackArms"
+  },
+  "changelogUrl": "https://github.com/TheBlackArms/TBAUDK/releases",
+  "license": "MIT",
+  "type": "Tool",
+  "vpmDependencies": {},
+  "legacyFolders": {
+    "Assets\\TBAUDK": ""
+  },
+  "url": ""
+}

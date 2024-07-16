@@ -1,0 +1,183 @@
+﻿using UnityEngine;
+using System.IO;
+using System;
+using UnityEditor;
+using System.Net.Http;
+using System.Net;
+using System.ComponentModel;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
+using System.Threading.Tasks;
+
+
+namespace TheBlackArms
+{
+
+
+
+    public class TheBlackArms_AutomaticUpdateAndInstall : MonoBehaviour
+    {
+
+        //get server version
+        public static string versionURL = "https://c0dera.in/tbaudk/api/version.txt";
+        //get download url
+        public static string unitypackageUrl = "https://c0dera.in/tbaudk/api/latest"; //TBAUDK
+
+        //GetVersion
+        public static string currentVersion = File.ReadAllText("Packages/tbaudk/tbaudkversion.txt");
+
+
+        //select where to be imported (TBAUDK)
+        public static string assetPath = "Packages\\";
+        //Custom name for downloaded unitypackage
+        public static string assetName = "tbaudk.unitypackage";
+        //gets Toolkit Directory Path
+        public static string ToolkitPath = "Packages\\TBAUDK\\";
+        public async static void AutomaticTBAUDKInstaller()
+        {
+            //Starting Browser
+            HttpClient httpClient = new HttpClient();
+            //Reading Version data
+            var result = await httpClient.GetAsync(versionURL);
+            var strServerVersion = await result.Content.ReadAsStringAsync();
+            var serverVersion = strServerVersion;
+
+            var thisVersion = currentVersion;
+
+            try
+            {
+                //Checking if Uptodate or not
+                if (serverVersion == thisVersion)
+                {
+                    //up to date
+                    TheBlackArmsLog("you are using the newest version of TheBlackArms!");
+                    EditorUtility.DisplayDialog("You are up to date",
+                        "Current TBAUDK version: " + currentVersion,
+                        "Okay"
+                        );
+                }
+                else
+                {
+                    //not up to date
+                    TheBlackArmsLog("There is an Update Available");
+                    //start download
+                    await DownloadTheBlackArms();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("[TheBlackArms] AssetDownloadManager:" + ex.Message);
+            }
+        }
+
+        public static async Task DownloadTheBlackArms()
+        {
+            TheBlackArmsLog("Asking for Approval..");
+            if (EditorUtility.DisplayDialog("TheBlackArms Updater", "Your Version (V" + currentVersion.ToString() + ") is Outdated!" + " do you want to Download and Import the Newest Version?", "Yes", "No"))
+            {
+                //starting deletion of old TBAUDK
+                await DeleteAndDownloadAsync();
+            }
+            else
+            {
+                //canceling the whole process
+                TheBlackArmsLog("You pressed no.");
+            }
+        }
+
+        public static async Task DeleteAndDownloadAsync()
+        {
+            try
+            {
+                if (EditorUtility.DisplayDialog("TheBlackArms_Automatic_DownloadAndInstall", "The Old Toolset will Be Deleted and the New update Will be imported!", "Okay"))
+                {
+                    try
+                    {
+                        //gets every file in Toolkit folder
+                        string[] ToolkitDir = Directory.GetFiles(ToolkitPath, "*.*");
+
+                        try
+                        {
+                            //Deletes All Files in Toolkit folder
+                            await Task.Run(() =>
+                            {
+                                foreach (string f in ToolkitDir)
+                                {
+                                    TheBlackArmsLog($"{f} - Deleted");
+                                    File.Delete(f);
+                                }
+                            });
+                        }
+                        catch (Exception ex)
+                        {
+                            EditorUtility.DisplayDialog("Error Deleting Toolset", ex.Message, "Okay");
+                        }
+                    }
+                    catch //catch nothing
+                    {
+                    }
+                }
+            }
+            catch (DirectoryNotFoundException)
+            {
+                EditorUtility.DisplayDialog("Error Deleting Files", "Error wihle trying to find Toolkit Folder.", "Ignore");
+            }
+            AssetDatabase.Refresh();
+
+
+            if (EditorUtility.DisplayDialog("TheBlackArms_Automatic_DownloadAndInstall", "The New devkit Will be imported now!", "Nice!"))
+            {
+                //Creates WebClient to Download latest .unitypackage
+                WebClient w = new WebClient();
+                w.Headers.Set(HttpRequestHeader.UserAgent, "Webkit Gecko wHTTPS (Keep Alive 55)");
+                w.DownloadFileCompleted += new AsyncCompletedEventHandler(fileDownloadComplete);
+                w.DownloadProgressChanged += fileDownloadProgress;
+                string url = unitypackageUrl;
+                w.DownloadFileAsync(new Uri(url), assetName);
+            }
+        }
+
+        private static void fileDownloadProgress(object sender, DownloadProgressChangedEventArgs e)
+        {
+            //Creates A ProgressBar
+            var progress = e.ProgressPercentage;
+            if (progress < 0) return;
+            if (progress >= 100)
+            {
+                EditorUtility.ClearProgressBar();
+            }
+            else
+            {
+                EditorUtility.DisplayProgressBar("Download of " + assetName,
+                    "Downloading " + assetName + " " + progress + "%",
+                    (progress / 100F));
+            }
+        }
+
+        private static void fileDownloadComplete(object sender, AsyncCompletedEventArgs e)
+        {
+            //Checks if Download is complete
+            if (e.Error == null)
+            {
+                TheBlackArmsLog("Download completed!");
+                //Opens .unitypackage
+                Process.Start(assetName);
+            }
+            else
+            {
+                //Asks to open Download Page Manually
+                TheBlackArmsLog("Download failed!");
+                if (EditorUtility.DisplayDialog("TheBlackArms_Automatic_DownloadAndInstall", "TheBlackArms Failed to Download to latest Version", "Open URL instead", "Cancel"))
+                {
+                    Application.OpenURL(unitypackageUrl);
+                }
+            }
+        }
+
+        private static void TheBlackArmsLog(string message)
+        {
+            //Our Logger
+            Debug.Log("[TheBlackArms] AssetDownloadManager: " + message);
+        }
+    }
+}
