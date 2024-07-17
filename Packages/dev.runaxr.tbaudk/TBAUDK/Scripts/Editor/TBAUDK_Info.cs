@@ -1,5 +1,5 @@
-﻿using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace TheBlackArms
 {
@@ -10,6 +10,7 @@ namespace TheBlackArms
         private const string Url1 = "https://trigon.systems/";
         private const string Link = "";
         private const string Link1 = "https://trigonstatus.statuspage.io";
+
         static TheBlackArms_Info()
         {
             EditorApplication.update -= DoSplashScreen;
@@ -23,6 +24,7 @@ namespace TheBlackArms
             {
                 EditorPrefs.SetBool("TheBlackArms_ShowInfoPanel", true);
             }
+
             if (EditorPrefs.GetBool("TheBlackArms_ShowInfoPanel"))
                 OpenSplashScreen();
         }
@@ -32,12 +34,13 @@ namespace TheBlackArms
         private static GUIStyle TheBlackArmsBottomHeader;
         private static GUIStyle TheBlackArmsHeaderLearnMoreButton;
         private static GUIStyle TheBlackArmsBottomHeaderLearnMoreButton;
+
         [MenuItem("TheBlackArms/Info", false, 500)]
         public static void OpenSplashScreen()
         {
             GetWindow<TheBlackArms_Info>(true);
         }
-        
+
         public static void Open()
         {
             OpenSplashScreen();
@@ -46,16 +49,17 @@ namespace TheBlackArms
         public void OnEnable()
         {
             titleContent = new GUIContent("TheBlackArms Info");
-            
-            minSize = new Vector2(400, 700);;
+
+            minSize = new Vector2(400, 700);
+            ;
             TheBlackArmsBottomHeader = new GUIStyle();
             ToolkitHeader = new GUIStyle
             {
                 normal =
-                    {
-                       background = Resources.Load("TheBlackArmsUDKHeader") as Texture2D,
-                       textColor = Color.white
-                    },
+                {
+                    background = Resources.Load("TheBlackArmsUDKHeader") as Texture2D,
+                    textColor = Color.white
+                },
                 fixedHeight = 200
             };
         }
@@ -67,27 +71,29 @@ namespace TheBlackArms
             TheBlackArmsHeaderLearnMoreButton.normal.textColor = Color.black;
             TheBlackArmsHeaderLearnMoreButton.fontSize = 12;
             TheBlackArmsHeaderLearnMoreButton.border = new RectOffset(10, 10, 10, 10);
-            Texture2D texture = UnityEditor.AssetDatabase.GetBuiltinExtraResource<Texture2D>("UI/Skin/UISprite.psd");
+            Texture2D texture = AssetDatabase.GetBuiltinExtraResource<Texture2D>("UI/Skin/UISprite.psd");
             TheBlackArmsHeaderLearnMoreButton.normal.background = texture;
             TheBlackArmsHeaderLearnMoreButton.active.background = texture;
             GUILayout.Space(4);
             GUI.backgroundColor = new Color(
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_R"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_G"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_B"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_A")
+                EditorPrefs.GetFloat("TBAUDKColor_R"),
+                EditorPrefs.GetFloat("TBAUDKColor_G"),
+                EditorPrefs.GetFloat("TBAUDKColor_B"),
+                EditorPrefs.GetFloat("TBAUDKColor_A")
             );
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("TheBlackArms Ultimate Development Kit"))
             {
                 Application.OpenURL(Url);
             }
+
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Trigon.Systems"))
             {
                 Application.OpenURL(Url1 + Link);
             }
+
             GUILayout.EndHorizontal();
             GUILayout.Space(4);
             //Update assets
@@ -96,6 +102,7 @@ namespace TheBlackArms
             {
                 Application.OpenURL(Link1);
             }
+
             GUILayout.EndHorizontal();
             GUILayout.Space(4);
             GUILayout.Label("TheBlackArms Version 1.0.0");
@@ -104,7 +111,7 @@ namespace TheBlackArms
             changeLogScroll = GUILayout.BeginScrollView(changeLogScroll, GUILayout.Width(390));
 
             GUILayout.Label(
-@"
+                @"
 == The Black Arms Ultimate Development Kit ==
 
 This Unity Kit is hopefully providing everything you need
@@ -117,7 +124,7 @@ The goal is to become the main package anyone needs
 If you have issues visit the github repository issues tab
 Updates can be done from within unity itself (or manually)
 Bugs/Issues can be reported via github issues
-There is not a discord for TheBlackArmss
+There is not a discord for TheBlackArms
 
 ------------------------------------------------------------
 ∞∞∞∞∞∞∞Contributors to TheBlackArms Unity Kit∞∞∞∞∞∞∞
@@ -138,9 +145,9 @@ There is not a discord for TheBlackArmss
 
             GUILayout.FlexibleSpace();
             GUILayout.BeginHorizontal();
-            EditorPrefs.SetBool("TheBlackArms_ShowInfoPanel", GUILayout.Toggle(EditorPrefs.GetBool("TheBlackArms_ShowInfoPanel"), "Show at startup"));
+            EditorPrefs.SetBool("TheBlackArms_ShowInfoPanel",
+                GUILayout.Toggle(EditorPrefs.GetBool("TheBlackArms_ShowInfoPanel"), "Show at startup"));
             GUILayout.EndHorizontal();
         }
-
     }
 }

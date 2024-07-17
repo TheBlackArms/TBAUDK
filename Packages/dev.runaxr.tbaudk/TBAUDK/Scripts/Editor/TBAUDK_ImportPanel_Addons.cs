@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
+using System.Collections.Generic;
 using System.IO;
-
 using Newtonsoft.Json.Linq;
+using UnityEditor;
+using UnityEngine;
 
 namespace TheBlackArms
 {
     [InitializeOnLoad]
     public class TheBlackArms_ImportPanel_Addons : EditorWindow
     {
-       private const string Url = "https://github.com/TheBlackArms/TBAUDK/";
+        private const string Url = "https://github.com/TheBlackArms/TBAUDK/";
         private const string Url1 = "https://trigon.systems/";
         private const string Link = "";
         private const string Link1 = "";
@@ -20,9 +19,9 @@ namespace TheBlackArms
         private static int _sizeX = 400;
         private static int _sizeY = 5000;
         private static Vector2 _changeLogScroll;
-        
 
-        [MenuItem("TheBlackArms/Import panel/addons", false, 501)]
+
+        [MenuItem("TheBlackArms/Import panel/Addons", false, 501)]
         public static void OpenImportPanel()
         {
             GetWindow<TheBlackArms_ImportPanel_Addons>(true);
@@ -30,7 +29,7 @@ namespace TheBlackArms
 
         public void OnEnable()
         {
-            titleContent = new GUIContent("TheBlackArms Import panel addons");
+            titleContent = new GUIContent("TBAUDK Addons Importer");
 
             TheBlackArms_ImportManager_Addons.checkForConfigUpdate();
             LoadJson();
@@ -52,9 +51,10 @@ namespace TheBlackArms
         public static void LoadJson()
         {
             assets.Clear();
-            
+
             dynamic configJson =
-                JObject.Parse(File.ReadAllText(TheBlackArms_Settings.projectConfigPath + TheBlackArms_ImportManager_Addons.configName));
+                JObject.Parse(File.ReadAllText(TheBlackArms_Settings.projectConfigPath +
+                                               TheBlackArms_ImportManager_Addons.configName));
 
             Debug.Log("Server Asset Url is: " + configJson["config"]["serverUrl"]);
             TheBlackArms_ImportManager_Addons.serverUrl = configJson["config"]["serverUrl"].ToString();
@@ -67,10 +67,10 @@ namespace TheBlackArms
 
                 var buttonName = "";
                 var file = "";
-                
+
                 foreach (var jToken in value)
                 {
-                    var y = (JProperty) jToken;
+                    var y = (JProperty)jToken;
                     switch (y.Name)
                     {
                         case "name":
@@ -81,6 +81,7 @@ namespace TheBlackArms
                             break;
                     }
                 }
+
                 assets[buttonName] = file;
             }
         }
@@ -90,29 +91,31 @@ namespace TheBlackArms
             GUILayout.Box("", style: _chillHeader);
             GUILayout.Space(4);
             GUI.backgroundColor = new Color(
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_R"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_G"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_B"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_A")
+                EditorPrefs.GetFloat("TBAUDKColor_R"),
+                EditorPrefs.GetFloat("TBAUDKColor_G"),
+                EditorPrefs.GetFloat("TBAUDKColor_B"),
+                EditorPrefs.GetFloat("TBAUDKColor_A")
             );
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Check for Updates"))
             {
-
                 TheBlackArms_AutomaticUpdateAndInstall.AutomaticTBAUDKInstaller();
             }
+
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("TheBlackArmss"))
+            if (GUILayout.Button("TheBlackArms"))
             {
                 Application.OpenURL(Url);
             }
+
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Trigon.Systems"))
             {
                 Application.OpenURL(Url1);
             }
+
             GUILayout.EndHorizontal();
             GUILayout.Space(4);
             //Update assets
@@ -121,26 +124,26 @@ namespace TheBlackArms
             {
                 TheBlackArms_ImportManager.updateConfig();
             }
+
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             GUILayout.EndHorizontal();
             GUILayout.Space(4);
 
 
-
             //Imports V!V
             GUI.backgroundColor = new Color(
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_R"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_G"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_B"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_A")
+                EditorPrefs.GetFloat("TBAUDKColor_R"),
+                EditorPrefs.GetFloat("TBAUDKColor_G"),
+                EditorPrefs.GetFloat("TBAUDKColor_B"),
+                EditorPrefs.GetFloat("TBAUDKColor_A")
             );
             _changeLogScroll = GUILayout.BeginScrollView(_changeLogScroll, GUILayout.Width(_sizeX));
             GUI.backgroundColor = new Color(
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_R"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_G"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_B"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_A")
+                EditorPrefs.GetFloat("TBAUDKColor_R"),
+                EditorPrefs.GetFloat("TBAUDKColor_G"),
+                EditorPrefs.GetFloat("TBAUDKColor_B"),
+                EditorPrefs.GetFloat("TBAUDKColor_A")
             );
             foreach (var asset in assets)
             {
@@ -154,8 +157,8 @@ namespace TheBlackArms
                 else
                 {
                     if (GUILayout.Button(
-                        (File.Exists(TheBlackArms_Settings.getAssetPath() + asset.Value) ? "Import" : "Download") +
-                        " " + asset.Key))
+                            (File.Exists(TheBlackArms_Settings.getAssetPath() + asset.Value) ? "Import" : "Download") +
+                            " " + asset.Key))
                     {
                         TheBlackArms_ImportManager_Addons.downloadAndImportAssetFromServer(asset.Value);
                     }
@@ -165,12 +168,14 @@ namespace TheBlackArms
                         TheBlackArms_ImportManager_Addons.deleteAsset(asset.Value);
                     }
                 }
+
                 GUILayout.EndHorizontal();
             }
-            
+
             GUILayout.EndScrollView();
             GUILayout.BeginHorizontal();
-            EditorPrefs.SetBool("TheBlackArms_ShowInfoPanel", GUILayout.Toggle(EditorPrefs.GetBool("TheBlackArms_ShowInfoPanel"), "Show at startup"));
+            EditorPrefs.SetBool("TheBlackArms_ShowInfoPanel",
+                GUILayout.Toggle(EditorPrefs.GetBool("TheBlackArms_ShowInfoPanel"), "Show at startup"));
             GUILayout.EndHorizontal();
         }
     }

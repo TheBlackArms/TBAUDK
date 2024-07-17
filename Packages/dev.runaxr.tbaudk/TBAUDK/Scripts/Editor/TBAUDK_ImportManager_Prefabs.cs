@@ -1,17 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
-using System;
-using System.ComponentModel;
-//using TheBlackArms_Shaders;
-using TheBlackArms;
 using UnityEditor;
+using UnityEngine;
 
 namespace TheBlackArms
 {
     public class TheBlackArms_ImportManager_Prefabs
     {
-        private const string V = "https://c0dera.in/tbaudk/api/assets/prefabs/";
+        private const string V = "https://c0dera.in/tbaudk/api/assets/prefabs";
         public static string configName = "importConfig_prefabs.json";
         public static string serverUrl = V;
         public static string internalServerUrl = V;
@@ -63,10 +61,11 @@ namespace TheBlackArms
                 //var updateFile = File.ReadAllText(TheBlackArms_Settings.projectConfigPath + "update_" + configName);
                 File.Delete(TheBlackArms_Settings.projectConfigPath + configName);
                 File.Move(TheBlackArms_Settings.projectConfigPath + "update_" + configName,
-                TheBlackArms_Settings.projectConfigPath + configName);
-                TheBlackArms_ImportPanel_Prefabs.LoadJson();
+                    TheBlackArms_Settings.projectConfigPath + configName);
+                TheBlackArms_ImportPanel.LoadJson();
 
-                EditorPrefs.SetInt("TheBlackArms_configImportLastUpdated", (int) DateTimeOffset.UtcNow.ToUnixTimeSeconds());
+                EditorPrefs.SetInt("TheBlackArms_configImportLastUpdated",
+                    (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds());
                 TheBlackArmsLog("Import Config has been updated!");
             }
             else
@@ -77,7 +76,7 @@ namespace TheBlackArms
 
         private static void fileDownloadCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            string assetName = ((WebClient) sender).QueryString["assetName"];
+            string assetName = ((WebClient)sender).QueryString["assetName"];
             if (e.Error == null)
             {
                 TheBlackArmsLog("Download of file " + assetName + " completed!");
@@ -92,7 +91,7 @@ namespace TheBlackArms
         private static void fileDownloadProgress(object sender, DownloadProgressChangedEventArgs e)
         {
             var progress = e.ProgressPercentage;
-            var assetName = ((WebClient) sender).QueryString["assetName"];
+            var assetName = ((WebClient)sender).QueryString["assetName"];
             if (progress < 0) return;
             if (progress >= 100)
             {
@@ -119,6 +118,7 @@ namespace TheBlackArms
                     return;
                 }
             }
+
             TheBlackArmsLog("Updating import config");
             updateConfig();
         }

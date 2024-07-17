@@ -15,7 +15,7 @@
         },
 
         "addonsSpacer": {
-            "name": "Addons"
+            "name": "Editor Tools"
         },
         "VRCQuestTools": {
             "name": "VRCQuestTools",
@@ -24,6 +24,10 @@
         "GestureManager": {
             "name": "Gesture Manager",
             "file": "GestureManager.unitypackage"
+        },
+        "Standard Lite Fix": {
+            "name": "Standard Lite Fix (Fixes Emissions Bug)",
+            "file": "SFX.unitypackage"
         },
 
         "placeHolderSpacer": {

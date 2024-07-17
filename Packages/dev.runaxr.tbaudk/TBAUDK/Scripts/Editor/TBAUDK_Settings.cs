@@ -1,13 +1,11 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using System;
 using System.IO;
-using System;
+using UnityEditor;
+using UnityEngine;
 //using Amazon.S3.Model;
-using UnityEngine.Serialization;
 
 namespace TheBlackArms
 {
-
     [InitializeOnLoad]
     public class TheBlackArms_Settings : EditorWindow
     {
@@ -20,7 +18,7 @@ namespace TheBlackArms
         private string backgroundConfig = "BackgroundVideo.txt";
         private static string projectDownloadPath = "Packages/dev.runaxr.tbaudk/TBAUDK/Assets/";
         private static GUIStyle ToolkitHeader;
-        public Color TBAUDKColor = Color.white;
+        public Color TBAUDKColor = Color.red;
         public static bool UITextRainbow { get; set; }
         //public Gradient TBAUDKGRADIENT;
 
@@ -66,7 +64,7 @@ namespace TheBlackArms
                 },
                 fixedHeight = 200
             };
-            
+
             if (!EditorPrefs.HasKey("TBA_discordRPC"))
             {
                 EditorPrefs.SetBool("TBA_discordRPC", true);
@@ -84,38 +82,40 @@ namespace TheBlackArms
             GUILayout.Box("", ToolkitHeader);
             GUILayout.Space(4);
             GUI.backgroundColor = new Color(
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_R"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_G"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_B"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_A")
-        );
+                EditorPrefs.GetFloat("TBAUDKColor_R"),
+                EditorPrefs.GetFloat("TBAUDKColor_G"),
+                EditorPrefs.GetFloat("TBAUDKColor_B"),
+                EditorPrefs.GetFloat("TBAUDKColor_A")
+            );
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("TheBlackArms"))
             {
                 Application.OpenURL(Url);
             }
+
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Trigon.Systems"))
             {
                 Application.OpenURL(Url1);
             }
+
             GUILayout.EndHorizontal();
             GUI.backgroundColor = new Color(
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_R"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_G"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_B"),
-            UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_A")
-        );
+                EditorPrefs.GetFloat("TBAUDKColor_R"),
+                EditorPrefs.GetFloat("TBAUDKColor_G"),
+                EditorPrefs.GetFloat("TBAUDKColor_B"),
+                EditorPrefs.GetFloat("TBAUDKColor_A")
+            );
 
             GUILayout.Space(4);
             EditorGUILayout.BeginVertical();
             GUI.backgroundColor = new Color(
-           UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_R"),
-           UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_G"),
-           UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_B"),
-           UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_A")
-       );
+                EditorPrefs.GetFloat("TBAUDKColor_R"),
+                EditorPrefs.GetFloat("TBAUDKColor_G"),
+                EditorPrefs.GetFloat("TBAUDKColor_B"),
+                EditorPrefs.GetFloat("TBAUDKColor_A")
+            );
 
             EditorGUILayout.LabelField("TheBlackArms Settings", EditorStyles.boldLabel);
             EditorGUILayout.Space(10);
@@ -134,10 +134,10 @@ namespace TheBlackArms
 
             if (EditorGUI.EndChangeCheck())
             {
-                UnityEditor.EditorPrefs.SetFloat("TBAUDKColor_R", TBAUDKColor.r);
-                UnityEditor.EditorPrefs.SetFloat("TBAUDKColor_G", TBAUDKColor.g);
-                UnityEditor.EditorPrefs.SetFloat("TBAUDKColor_B", TBAUDKColor.b);
-                UnityEditor.EditorPrefs.SetFloat("TBAUDKColor_A", TBAUDKColor.a);
+                EditorPrefs.SetFloat("TBAUDKColor_R", TBAUDKColor.r);
+                EditorPrefs.SetFloat("TBAUDKColor_G", TBAUDKColor.g);
+                EditorPrefs.SetFloat("TBAUDKColor_B", TBAUDKColor.b);
+                EditorPrefs.SetFloat("TBAUDKColor_A", TBAUDKColor.a);
             }
 
             EditorGUILayout.Space();
@@ -145,10 +145,10 @@ namespace TheBlackArms
             {
                 Color TBAUDKColor = Color.gray;
 
-                UnityEditor.EditorPrefs.SetFloat("TBAUDKColor_R", TBAUDKColor.r);
-                UnityEditor.EditorPrefs.SetFloat("TBAUDKColor_G", TBAUDKColor.g);
-                UnityEditor.EditorPrefs.SetFloat("TBAUDKColor_B", TBAUDKColor.b);
-                UnityEditor.EditorPrefs.SetFloat("TBAUDKColor_A", TBAUDKColor.a);
+                EditorPrefs.SetFloat("TBAUDKColor_R", TBAUDKColor.r);
+                EditorPrefs.SetFloat("TBAUDKColor_G", TBAUDKColor.g);
+                EditorPrefs.SetFloat("TBAUDKColor_B", TBAUDKColor.b);
+                EditorPrefs.SetFloat("TBAUDKColor_A", TBAUDKColor.a);
             }
 
             //TBAUDKGRADIENT = EditorGUI.GradientField(new Rect(3, 290, position.width - 6, 15), "TBAUDK Gradient", TBAUDKGRADIENT);
@@ -182,6 +182,7 @@ namespace TheBlackArms
                 Debug.ClearDeveloperConsole();
                 Debug.unityLogger.logEnabled = true;
             }
+
             GUILayout.EndHorizontal();
             GUILayout.Space(4);
             GUILayout.BeginHorizontal();
@@ -227,11 +228,11 @@ namespace TheBlackArms
 
             GUILayout.Space(4);
             GUI.backgroundColor = new Color(
-             UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_R"),
-             UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_G"),
-             UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_B"),
-             UnityEditor.EditorPrefs.GetFloat("TBAUDKColor_A")
-         );
+                EditorPrefs.GetFloat("TBAUDKColor_R"),
+                EditorPrefs.GetFloat("TBAUDKColor_G"),
+                EditorPrefs.GetFloat("TBAUDKColor_B"),
+                EditorPrefs.GetFloat("TBAUDKColor_A")
+            );
             GUILayout.Label("Asset path:");
             GUILayout.BeginHorizontal();
             var customAssetPath = EditorGUILayout.TextField("",
@@ -259,7 +260,8 @@ namespace TheBlackArms
 
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
-            EditorPrefs.SetBool("TheBlackArms_ShowInfoPanel", GUILayout.Toggle(EditorPrefs.GetBool("TheBlackArms_ShowInfoPanel"), "Show at startup"));
+            EditorPrefs.SetBool("TheBlackArms_ShowInfoPanel",
+                GUILayout.Toggle(EditorPrefs.GetBool("TheBlackArms_ShowInfoPanel"), "Show at startup"));
             GUILayout.EndHorizontal();
         }
     }

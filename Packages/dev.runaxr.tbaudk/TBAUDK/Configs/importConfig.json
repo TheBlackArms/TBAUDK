@@ -11,15 +11,19 @@
 
 
         "patchKit2DepricationAnnouncement": {
-            "name": "TheBlackArmsUDK Importer is Not Finished\nDo not expect anything in here to work\nThis is Early Release"
+            "name": "This contains imports for the TBAUDK itself"
         },
 
         "addonsSpacer": {
-            "name": "Addons"
+            "name": "Main Imports"
         },
         "TheBlackArms": {
-            "name": "TheBlackArmss",
-            "file": "TheBlackArms.unitypackage"
+            "name": "TBAUDK",
+            "file": "TBAUDK.unitypackage"
+        },
+        "Configs": {
+            "name": "Importer Configs",
+            "file": "Configs.unitypackage"
         },
         
         "placeHolderSpacer": {

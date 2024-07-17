@@ -21,11 +21,12 @@ namespace TBAUDK
 
         private static void LogPlayModeState(PlayModeStateChange state)
         {
-            if(state == PlayModeStateChange.EnteredEditMode)
+            if (state == PlayModeStateChange.EnteredEditMode)
             {
                 TBAUDK_DiscordRPC.updateState(RpcState.EDITMODE);
                 TBAUDK_DiscordRPC.ResetTime();
-            } else if(state == PlayModeStateChange.EnteredPlayMode)
+            }
+            else if (state == PlayModeStateChange.EnteredPlayMode)
             {
                 TBAUDK_DiscordRPC.updateState(RpcState.PLAYMODE);
                 TBAUDK_DiscordRPC.ResetTime();

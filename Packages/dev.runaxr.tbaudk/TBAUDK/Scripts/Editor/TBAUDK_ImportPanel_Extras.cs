@@ -7,7 +7,7 @@ using UnityEngine;
 namespace TheBlackArms
 {
     [InitializeOnLoad]
-    public class TheBlackArms_ImportPanel_Avatars : EditorWindow
+    public class TheBlackArms_ImportPanel_Extras : EditorWindow
     {
         private const string Url = "https://github.com/TheBlackArms/TBAUDK/";
         private const string Url1 = "https://trigon.systems/";
@@ -21,17 +21,17 @@ namespace TheBlackArms
         private static Vector2 _changeLogScroll;
 
 
-        [MenuItem("TheBlackArms/Import panel/Avatars", false, 501)]
+        [MenuItem("TheBlackArms/Import panel/Extras", false, 501)]
         public static void OpenImportPanel()
         {
-            GetWindow<TheBlackArms_ImportPanel_Avatars>(true);
+            GetWindow<TheBlackArms_ImportPanel>(true);
         }
 
         public void OnEnable()
         {
-            titleContent = new GUIContent("TBAUDK Avatars Importer");
+            titleContent = new GUIContent("TBAUDK Main Importer");
 
-            TheBlackArms_ImportManager_Avatars.checkForConfigUpdate();
+            TheBlackArms_ImportManager.checkForConfigUpdate();
             LoadJson();
 
             maxSize = new Vector2(_sizeX, _sizeY);
@@ -54,7 +54,7 @@ namespace TheBlackArms
 
             dynamic configJson =
                 JObject.Parse(File.ReadAllText(TheBlackArms_Settings.projectConfigPath +
-                                               TheBlackArms_ImportManager_Avatars.configName));
+                                               TheBlackArms_ImportManager_Extras.configName));
 
             Debug.Log("Server Asset Url is: " + configJson["config"]["serverUrl"]);
             TheBlackArms_ImportManager.serverUrl = configJson["config"]["serverUrl"].ToString();
@@ -160,12 +160,12 @@ namespace TheBlackArms
                             (File.Exists(TheBlackArms_Settings.getAssetPath() + asset.Value) ? "Import" : "Download") +
                             " " + asset.Key))
                     {
-                        TheBlackArms_ImportManager_Avatars.downloadAndImportAssetFromServer(asset.Value);
+                        TheBlackArms_ImportManager.downloadAndImportAssetFromServer(asset.Value);
                     }
 
                     if (GUILayout.Button("Del", GUILayout.Width(40)))
                     {
-                        TheBlackArms_ImportManager_Avatars.deleteAsset(asset.Value);
+                        TheBlackArms_ImportManager.deleteAsset(asset.Value);
                     }
                 }
 

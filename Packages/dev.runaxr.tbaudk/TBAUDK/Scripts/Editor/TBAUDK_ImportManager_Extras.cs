@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
@@ -7,10 +7,10 @@ using UnityEngine;
 
 namespace TheBlackArms
 {
-    public class TheBlackArms_ImportManager
+    public class TheBlackArms_ImportManager_Extras
     {
-        private const string V = "https://c0dera.in/tbaudk/api/assets/";
-        public static string configName = "importConfig.json";
+        private const string V = "https://c0dera.in/tbaudk/api/assets/extras";
+        public static string configName = "importConfig_extras.json";
         public static string serverUrl = V;
         public static string internalServerUrl = V;
 

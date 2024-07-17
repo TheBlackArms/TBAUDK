@@ -14,7 +14,7 @@
         }
     }
 
-        public enum RpcState
+    public enum RpcState
     {
         EDITMODE = 0,
         PLAYMODE = 1,
