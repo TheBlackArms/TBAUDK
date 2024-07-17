@@ -11,7 +11,7 @@ namespace TheBlackArms
             Application.OpenURL("https://github.com/TheBlackArms/TBAUDK");
         }
 
-        [MenuItem("TheBlackArms/Utilities/Update configs", false, 1000)]
+        [MenuItem("TheBlackArms/Update Importer Config", false, 1000)]
         public static void ForceUpdateConfigs()
         {
             TheBlackArms_ImportManager.updateConfig();

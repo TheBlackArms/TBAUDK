@@ -118,9 +118,9 @@ namespace TheBlackArms
 
             GUILayout.EndHorizontal();
             GUILayout.Space(4);
-            //Update assets
+            //Update Assets Config
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Update assets (config)"))
+            if (GUILayout.Button("Update Config"))
             {
                 TheBlackArms_ImportManager.updateConfig();
             }
