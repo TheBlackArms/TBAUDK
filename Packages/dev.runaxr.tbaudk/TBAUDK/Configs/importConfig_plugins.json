@@ -6,7 +6,7 @@
             "sizeY": 700
         }
     },
-    
+
     "assets": {
 
 
@@ -15,18 +15,18 @@
         },
 
         "addonsSpacer": {
-            "name": "Addons"
+            "name": "Plugins"
         },
         "TheBlackArms": {
-            "name": "TheBlackArmss",
+            "name": "TheBlackArms",
             "file": "TheBlackArms.unitypackage"
         },
-        
+
         "placeHolderSpacer": {
             "name": "TheBlackArmsUDK"
         }
 
-        
-        
+
+
     }
 }

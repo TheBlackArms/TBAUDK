@@ -42,7 +42,7 @@ namespace TheBlackArms
             {
                 normal =
                 {
-                    background = Resources.Load("TheBlackArmsHeader") as Texture2D,
+                    background = Resources.Load("TheBlackArmsUDKHeader") as Texture2D,
                     textColor = Color.white
                 },
                 fixedHeight = 200

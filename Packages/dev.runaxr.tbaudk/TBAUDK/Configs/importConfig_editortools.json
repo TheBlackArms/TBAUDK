@@ -6,27 +6,31 @@
             "sizeY": 700
         }
     },
-    
+
     "assets": {
 
 
         "patchKit2DepricationAnnouncement": {
-            "name": "TheBlackArmsUDK Importer is Not Finished\nDo not expect anything in here to work\nThis is Early Release"
+            "name": "TheBlackArmsUDK Importer is Not Finished\nThis is Early Release"
         },
 
         "addonsSpacer": {
             "name": "Addons"
         },
-        "TheBlackArms": {
-            "name": "TheBlackArmss",
-            "file": "TheBlackArms.unitypackage"
+        "VRCQuestTools": {
+            "name": "VRCQuestTools",
+            "file": "VRCQuestTools.unitypackage"
         },
-        
+        "GestureManager": {
+            "name": "Gesture Manager",
+            "file": "GestureManager.unitypackage"
+        },
+
         "placeHolderSpacer": {
             "name": "TheBlackArmsUDK"
         }
 
-        
-        
+
+
     }
 }

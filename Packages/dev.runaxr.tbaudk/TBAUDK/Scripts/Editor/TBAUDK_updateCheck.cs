@@ -10,7 +10,7 @@ public class TheBlackArms_updateCheck : MonoBehaviour
     public class Startup
     {
         public static string versionURL = "https://c0dera.in/TBAUDK/api/version.txt";
-        public static string currentVersion = File.ReadAllText("Assets/TheBlackArms/TheBlackArmsversion.txt");
+        public static string currentVersion = File.ReadAllText("Packages/dev.runaxr.tbaudk/TBAUDKUpdater/Editor/TBAUDKversion.txt");
         static Startup()
         {
             Check();

@@ -6,7 +6,7 @@
             "sizeY": 700
         }
     },
-    
+
     "assets": {
 
 
@@ -21,12 +21,12 @@
             "name": "TheBlackArms",
             "file": "TheBlackArms.unitypackage"
         },
-        
+
         "placeHolderSpacer": {
             "name": "TheBlackArmsUDK"
         }
 
-        
-        
+
+
     }
 }

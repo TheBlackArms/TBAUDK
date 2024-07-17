@@ -21,14 +21,14 @@ namespace TheBlackArms
         //get server version
         public static string versionURL = "https://c0dera.in/tbaudk/api/version.txt";
         //get download url
-        public static string unitypackageUrl = "https://c0dera.in/tbaudk/api/latest"; //TBAUDK
+        public static string unitypackageUrl = "https://c0dera.in/tbaudk/api/latest/tbaudk.unitypackage"; //TBAUDK
 
         //GetVersion
-        public static string currentVersion = File.ReadAllText("Packages/tbaudk/tbaudkversion.txt");
+        public static string currentVersion = File.ReadAllText("Packages/dev.runaxr.tbaudk/TBAUDKUpdater/editor/TBAUDKVersion.txt");
 
 
         //select where to be imported (TBAUDK)
-        public static string assetPath = "Packages\\";
+        public static string assetPath = "Assets\\";
         //Custom name for downloaded unitypackage
         public static string assetName = "tbaudk.unitypackage";
         //gets Toolkit Directory Path

@@ -16,9 +16,9 @@ namespace TheBlackArms
         private const string Link = "";
         private const string Link1 = "";
 
-        public static string projectConfigPath = "Packages/Toolkit/TheBlackArms/Configs/";
+        public static string projectConfigPath = "Packages/dev.runaxr.tbaudk/TBAUDK/Configs/";
         private string backgroundConfig = "BackgroundVideo.txt";
-        private static string projectDownloadPath = "Packages/Toolkit/TheBlackArms/Assets/";
+        private static string projectDownloadPath = "Packages/dev.runaxr.tbaudk/TBAUDK/Assets/";
         private static GUIStyle ToolkitHeader;
         public Color TBAUDKColor = Color.white;
         public static bool UITextRainbow { get; set; }
