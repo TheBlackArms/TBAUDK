@@ -10,20 +10,46 @@
     "assets": {
 
 
-        "patchKit2DepricationAnnouncement": {
-            "name": "This contains imports for the TBAUDK itself"
+        "Announcement1": {
+            "name": "Welcome to the TBAUDK Importer"
+        },
+        "Announcement2": {
+            "name": "The Importer is in very early stages"
+        },
+        "Announcement3": {
+            "name": "At least now it works :D"
+        },
+        "Announcement4": {
+            "name": "Updating file is just clicking Del then downloading again"
+        },
+        "Announcement4": {
+            "name": "Happy Development :D"
         },
 
-        "addonsSpacer": {
+        "TBAUDK Files": {
             "name": "Main Imports"
         },
         "TheBlackArms": {
             "name": "TBAUDK",
             "file": "TBAUDK.unitypackage"
         },
-        "Configs": {
-            "name": "Importer Configs",
-            "file": "Configs.unitypackage"
+        "EditorTools": {
+            "name": "Editor Tools"
+        },
+        "VRCQuestTools": {
+            "name": "VRCQuestTools",
+            "file": "VRCQuestTools.unitypackage"
+        },
+        "GestureManager": {
+            "name": "Gesture Manager",
+            "file": "GestureManager.unitypackage"
+        },
+        "Fixes": {
+            "name": "Bugfixes for VRC/Unity"
+        },
+        "Standard Lite Fix": {
+            "name": "Standard Lite Emissions BugFix",
+            "file": "SFX.unitypackage"
         },
         
         "placeHolderSpacer": {
