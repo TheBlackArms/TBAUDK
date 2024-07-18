@@ -11,44 +11,122 @@
 
 
         "Announcement1": {
-            "name": "Welcome to the TBAUDK Importer"
+            "name": "TBAUDK Importer Panel"
         },
         "Announcement2": {
-            "name": "The Importer is in very early stages"
+            "name": "Anything in () is a REQUIREMENT for that import"
         },
         "Announcement3": {
-            "name": "At least now it works :D"
+            "name": "Packages curated by the TBAUDK developer"
         },
         "Announcement4": {
-            "name": "Updating file is just clicking Del then downloading again"
+            "name": "Del then download to update packages"
         },
-        "Announcement4": {
-            "name": "Happy Development :D"
+        "Announcement5": {
+            "name": "Want your packages here? We'll have something for that soon"
         },
 
         "TBAUDK Files": {
-            "name": "Main Imports"
+            "name": "\nMain Imports"
         },
         "TheBlackArms": {
             "name": "TBAUDK",
             "file": "TBAUDK.unitypackage"
         },
+
+        "Shaders": {
+            "name": "\nShaders"
+        },
+        "LilToon": {
+            "name": "lilToon",
+            "file": "lilToon.unitypackage"
+        },
+        "Poiyomi Toon": {
+            "name": "Poiyomi Toon (VRCSDK)",
+            "file": "Poiyomi.unitypackage"
+        },
+        "Leviant": {
+            "name": "Leviant Uberspace [OVERCLOCKED]",
+            "file": "Levi.unitypackage"
+        },
+
         "EditorTools": {
-            "name": "Editor Tools"
+            "name": "\nEditor Tools"
         },
         "VRCQuestTools": {
-            "name": "VRCQuestTools",
+            "name": "VRCQuestTools (VRCSDK)",
             "file": "VRCQuestTools.unitypackage"
         },
         "GestureManager": {
-            "name": "Gesture Manager",
+            "name": "Gesture Manager (VRCSDK)",
             "file": "GestureManager.unitypackage"
         },
-        "Fixes": {
-            "name": "Bugfixes for VRC/Unity"
+        "MyHierarchy": {
+            "name": "My Hierarchy by INF Dev",
+            "file": "MyHierarchy.unitypackage"
         },
-        "Standard Lite Fix": {
-            "name": "Standard Lite Emissions BugFix",
+        "UniVRM": {
+            "name": "UniVRM",
+            "file": "UniVRM.unitypackage"
+        },
+        "vrcfury": {
+            "name": "VRCFury (VRCSDK)",
+            "file": "VRCFury.unitypackage"
+        },
+        "pumpkins": {
+            "name": "Pumpkins Avatar Tools (VRCSDK)",
+            "file": "Pumpkin.unitypackage"
+        },
+        "RATS": {
+            "name": "Raz's Animator Tweaks n Stuff",
+            "file": "RATS.unitypackage"
+        },
+        "FACS": {
+            "name": "FACS Utilities",
+            "file": "FACS.unitypackage"
+        },
+        "BToolbox": {
+            "name": "BUDDYWORKS Toolbox",
+            "file": "BToolbox.unitypackage"
+        },
+        "BEditorTools": {
+            "name": "BUDDYWORKS EditorTools",
+            "file": "BEditorTools.unitypackage"
+        },
+        "BAvatarDynamics": {
+            "name": "BUDDYWORKS Avatar Dynamics (VRCSDK)",
+            "file": "BAvatarDynamics.unitypackage"
+        },
+
+        "AvatarAddons": {
+            "name": "\nAvatar Addons"
+        },
+        "gogo": {
+            "name": "GogoLoco (VRCFURY)",
+            "file": "Gogo.unitypackage"
+        },
+        "BPoseExtension": {
+            "name": "BUDDYWORKS Pose Extension (VRCFURY)",
+            "file": "BPoseExtension.unitypackage"
+        },
+        "BAvatarScene": {
+            "name": "BUDDYWORKS Avatar Scene",
+            "file": "BAvatarScene.unitypackage"
+        },
+
+        "WorldAddons": {
+            "name": "\nWorld Addons"
+        },
+        "EQS": {
+            "name": "EasyQuestSwitch (VRCSDK)",
+            "file": "EasyQuestSwitch.unitypackage"
+        },
+
+        "Fixes": {
+            "name": "\nBugfixes for VRC/Unity"
+        },
+        "SFX": {
+            "name": "Standard Lite Emissions Fix (VRCSDK)",
             "file": "SFX.unitypackage"
         },
         

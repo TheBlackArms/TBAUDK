@@ -19,7 +19,7 @@ namespace TheBlackArms
 
         public static void UpdateTBAUDKBtn()
         {
-            TheBlackArms_AutomaticUpdateAndInstall.AutomaticTBAUDKInstaller();
+            TheBlackArmsAutomaticUpdateAndInstall.AutomaticTbaudkInstaller();
         }
     }
 }

@@ -99,7 +99,7 @@ namespace TheBlackArms
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Check for Updates"))
             {
-                TheBlackArms_AutomaticUpdateAndInstall.AutomaticTBAUDKInstaller();
+                TheBlackArmsAutomaticUpdateAndInstall.AutomaticTbaudkInstaller();
             }
 
             GUILayout.EndHorizontal();

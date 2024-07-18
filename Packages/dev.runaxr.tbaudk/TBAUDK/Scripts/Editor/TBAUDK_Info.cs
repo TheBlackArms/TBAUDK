@@ -105,7 +105,7 @@ namespace TheBlackArms
 
             GUILayout.EndHorizontal();
             GUILayout.Space(4);
-            GUILayout.Label("TheBlackArms Version 1.0.0");
+            GUILayout.Label("TheBlackArms Version 1.0.3");
             GUILayout.Space(2);
             GUILayout.Label("TBAUDK imported correctly if you are seeing this");
             changeLogScroll = GUILayout.BeginScrollView(changeLogScroll, GUILayout.Width(390));

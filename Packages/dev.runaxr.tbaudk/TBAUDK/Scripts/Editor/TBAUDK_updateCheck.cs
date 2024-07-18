@@ -30,7 +30,7 @@ public class TheBlackArms_updateCheck : MonoBehaviour
 
             if (serverVersion != thisVersion)
             {
-                TheBlackArms_AutomaticUpdateAndInstall.AutomaticTBAUDKInstaller();
+                TheBlackArmsAutomaticUpdateAndInstall.AutomaticTbaudkInstaller();
             }
         }
     }
