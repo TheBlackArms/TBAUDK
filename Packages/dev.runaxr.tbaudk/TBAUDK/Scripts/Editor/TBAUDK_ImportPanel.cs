@@ -7,15 +7,15 @@ using UnityEngine;
 namespace TheBlackArms
 {
     [InitializeOnLoad]
-    public class TheBlackArms_ImportPanel : EditorWindow
+    public class TheBlackArmsImportPanel : EditorWindow
     {
         private const string Url = "https://github.com/TheBlackArms/TBAUDK/";
         private const string Url1 = "https://trigon.systems/";
         private const string Link = "";
         private const string Link1 = "";
 
-        private static GUIStyle _chillHeader;
-        private static Dictionary<string, string> assets = new Dictionary<string, string>();
+        private static GUIStyle _tbaudkHeader;
+        private static Dictionary<string, string> _assets = new Dictionary<string, string>();
         private static int _sizeX = 400;
         private static int _sizeY = 5000;
         private static Vector2 _changeLogScroll;
@@ -24,20 +24,20 @@ namespace TheBlackArms
         [MenuItem("TheBlackArms/Importer", false, 501)]
         public static void OpenImportPanel()
         {
-            GetWindow<TheBlackArms_ImportPanel>(true);
+            GetWindow<TheBlackArmsImportPanel>(true);
         }
 
         public void OnEnable()
         {
             titleContent = new GUIContent("TBAUDK Main Importer");
 
-            TheBlackArms_ImportManager.checkForConfigUpdate();
+            TheBlackArmsImportManager.checkForConfigUpdate();
             LoadJson();
 
             maxSize = new Vector2(_sizeX, _sizeY);
             minSize = maxSize;
 
-            _chillHeader = new GUIStyle
+            _tbaudkHeader = new GUIStyle
             {
                 normal =
                 {
@@ -50,14 +50,14 @@ namespace TheBlackArms
 
         public static void LoadJson()
         {
-            assets.Clear();
+            _assets.Clear();
 
             dynamic configJson =
-                JObject.Parse(File.ReadAllText(TheBlackArms_Settings.projectConfigPath +
-                                               TheBlackArms_ImportManager.configName));
+                JObject.Parse(File.ReadAllText(TheBlackArmsSettings.ProjectConfigPath +
+                                               TheBlackArmsImportManager.ConfigName));
 
             Debug.Log("Server Asset Url is: " + configJson["config"]["serverUrl"]);
-            TheBlackArms_ImportManager.serverUrl = configJson["config"]["serverUrl"].ToString();
+            TheBlackArmsImportManager.ServerUrl = configJson["config"]["serverUrl"].ToString();
             _sizeX = (int)configJson["config"]["window"]["sizeX"];
             _sizeY = (int)configJson["config"]["window"]["sizeY"];
 
@@ -82,13 +82,13 @@ namespace TheBlackArms
                     }
                 }
 
-                assets[buttonName] = file;
+                _assets[buttonName] = file;
             }
         }
 
         public void OnGUI()
         {
-            GUILayout.Box("", style: _chillHeader);
+            GUILayout.Box("", style: _tbaudkHeader);
             GUILayout.Space(4);
             GUI.backgroundColor = new Color(
                 EditorPrefs.GetFloat("TBAUDKColor_R"),
@@ -122,7 +122,7 @@ namespace TheBlackArms
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Update Config"))
             {
-                TheBlackArms_ImportManager.updateConfig();
+                TheBlackArmsImportManager.UpdateConfig();
             }
 
             GUILayout.EndHorizontal();
@@ -145,7 +145,7 @@ namespace TheBlackArms
                 EditorPrefs.GetFloat("TBAUDKColor_B"),
                 EditorPrefs.GetFloat("TBAUDKColor_A")
             );
-            foreach (var asset in assets)
+            foreach (var asset in _assets)
             {
                 GUILayout.BeginHorizontal();
                 if (asset.Value == "")
@@ -157,15 +157,15 @@ namespace TheBlackArms
                 else
                 {
                     if (GUILayout.Button(
-                            (File.Exists(TheBlackArms_Settings.getAssetPath() + asset.Value) ? "Import" : "Download") +
+                            (File.Exists(TheBlackArmsSettings.GetAssetPath() + asset.Value) ? "Import" : "Download") +
                             " " + asset.Key))
                     {
-                        TheBlackArms_ImportManager.downloadAndImportAssetFromServer(asset.Value);
+                        TheBlackArmsImportManager.DownloadAndImportAssetFromServer(asset.Value);
                     }
 
                     if (GUILayout.Button("Del", GUILayout.Width(40)))
                     {
-                        TheBlackArms_ImportManager.deleteAsset(asset.Value);
+                        TheBlackArmsImportManager.DeleteAsset(asset.Value);
                     }
                 }
 

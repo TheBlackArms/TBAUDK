@@ -4,14 +4,14 @@ using UnityEngine;
 namespace TheBlackArms
 {
     [InitializeOnLoad]
-    public class TheBlackArms_Info : EditorWindow
+    public class TheBlackArmsInfo : EditorWindow
     {
         private const string Url = "https://github.com/TheBlackArms/TBAUDK/";
         private const string Url1 = "https://trigon.systems/";
         private const string Link = "";
         private const string Link1 = "https://trigonstatus.statuspage.io";
 
-        static TheBlackArms_Info()
+        static TheBlackArmsInfo()
         {
             EditorApplication.update -= DoSplashScreen;
             EditorApplication.update += DoSplashScreen;
@@ -29,16 +29,16 @@ namespace TheBlackArms
                 OpenSplashScreen();
         }
 
-        private static Vector2 changeLogScroll;
-        private static GUIStyle ToolkitHeader;
-        private static GUIStyle TheBlackArmsBottomHeader;
-        private static GUIStyle TheBlackArmsHeaderLearnMoreButton;
-        private static GUIStyle TheBlackArmsBottomHeaderLearnMoreButton;
+        private static Vector2 _changeLogScroll;
+        private static GUIStyle _toolkitHeader;
+        private static GUIStyle _theBlackArmsBottomHeader;
+        private static GUIStyle _theBlackArmsHeaderLearnMoreButton;
+        private static GUIStyle _theBlackArmsBottomHeaderLearnMoreButton;
 
         [MenuItem("TheBlackArms/Info", false, 500)]
         public static void OpenSplashScreen()
         {
-            GetWindow<TheBlackArms_Info>(true);
+            GetWindow<TheBlackArmsInfo>(true);
         }
 
         public static void Open()
@@ -52,8 +52,8 @@ namespace TheBlackArms
 
             minSize = new Vector2(400, 700);
             ;
-            TheBlackArmsBottomHeader = new GUIStyle();
-            ToolkitHeader = new GUIStyle
+            _theBlackArmsBottomHeader = new GUIStyle();
+            _toolkitHeader = new GUIStyle
             {
                 normal =
                 {
@@ -66,14 +66,14 @@ namespace TheBlackArms
 
         public void OnGUI()
         {
-            GUILayout.Box("", ToolkitHeader);
-            TheBlackArmsHeaderLearnMoreButton = EditorStyles.miniButton;
-            TheBlackArmsHeaderLearnMoreButton.normal.textColor = Color.black;
-            TheBlackArmsHeaderLearnMoreButton.fontSize = 12;
-            TheBlackArmsHeaderLearnMoreButton.border = new RectOffset(10, 10, 10, 10);
+            GUILayout.Box("", _toolkitHeader);
+            _theBlackArmsHeaderLearnMoreButton = EditorStyles.miniButton;
+            _theBlackArmsHeaderLearnMoreButton.normal.textColor = Color.black;
+            _theBlackArmsHeaderLearnMoreButton.fontSize = 12;
+            _theBlackArmsHeaderLearnMoreButton.border = new RectOffset(10, 10, 10, 10);
             Texture2D texture = AssetDatabase.GetBuiltinExtraResource<Texture2D>("UI/Skin/UISprite.psd");
-            TheBlackArmsHeaderLearnMoreButton.normal.background = texture;
-            TheBlackArmsHeaderLearnMoreButton.active.background = texture;
+            _theBlackArmsHeaderLearnMoreButton.normal.background = texture;
+            _theBlackArmsHeaderLearnMoreButton.active.background = texture;
             GUILayout.Space(4);
             GUI.backgroundColor = new Color(
                 EditorPrefs.GetFloat("TBAUDKColor_R"),
@@ -108,7 +108,7 @@ namespace TheBlackArms
             GUILayout.Label("TheBlackArms Version 1.0.3");
             GUILayout.Space(2);
             GUILayout.Label("TBAUDK imported correctly if you are seeing this");
-            changeLogScroll = GUILayout.BeginScrollView(changeLogScroll, GUILayout.Width(390));
+            _changeLogScroll = GUILayout.BeginScrollView(_changeLogScroll, GUILayout.Width(390));
 
             GUILayout.Label(
                 @"
@@ -135,13 +135,13 @@ There is not a discord for TheBlackArms
             GUILayout.EndScrollView();
             GUILayout.Space(4);
 
-            GUILayout.Box("", TheBlackArmsBottomHeader);
-            TheBlackArmsBottomHeaderLearnMoreButton = EditorStyles.miniButton;
-            TheBlackArmsBottomHeaderLearnMoreButton.normal.textColor = Color.black;
-            TheBlackArmsBottomHeaderLearnMoreButton.fontSize = 10;
-            TheBlackArmsBottomHeaderLearnMoreButton.border = new RectOffset(10, 10, 10, 10);
-            TheBlackArmsBottomHeaderLearnMoreButton.normal.background = texture;
-            TheBlackArmsBottomHeaderLearnMoreButton.active.background = texture;
+            GUILayout.Box("", _theBlackArmsBottomHeader);
+            _theBlackArmsBottomHeaderLearnMoreButton = EditorStyles.miniButton;
+            _theBlackArmsBottomHeaderLearnMoreButton.normal.textColor = Color.black;
+            _theBlackArmsBottomHeaderLearnMoreButton.fontSize = 10;
+            _theBlackArmsBottomHeaderLearnMoreButton.border = new RectOffset(10, 10, 10, 10);
+            _theBlackArmsBottomHeaderLearnMoreButton.normal.background = texture;
+            _theBlackArmsBottomHeaderLearnMoreButton.active.background = texture;
 
             GUILayout.FlexibleSpace();
             GUILayout.BeginHorizontal();

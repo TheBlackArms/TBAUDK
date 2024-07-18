@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TheBlackArms
 {
-    public class TheBlackArms_Help
+    public class TheBlackArmsHelp
     {
         [MenuItem("TheBlackArms/Help/Github", false, 1049)]
         public static void OpenDiscordLink()
@@ -14,10 +14,10 @@ namespace TheBlackArms
         [MenuItem("TheBlackArms/Update Importer Config", false, 1000)]
         public static void ForceUpdateConfigs()
         {
-            TheBlackArms_ImportManager.updateConfig();
+            TheBlackArmsImportManager.UpdateConfig();
         }
 
-        public static void UpdateTBAUDKBtn()
+        public static void UpdateTbaudkBtn()
         {
             TheBlackArmsAutomaticUpdateAndInstall.AutomaticTbaudkInstaller();
         }

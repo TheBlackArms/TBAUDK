@@ -4,7 +4,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace AutoSaver
+namespace TBAUDK.Scripts.Editor
 {
     [InitializeOnLoad]
     public class TheBlackArmsplashScreen : EditorWindow
@@ -27,10 +27,10 @@ namespace AutoSaver
                 OpenSplashScreen();
         }
 
-        private static GUIStyle Header;
-        private static Vector2 changeLogScroll;
-        private float Timer = 60f;
-        float TimeLeft = 0f;
+        private static GUIStyle _header;
+        private static Vector2 _changeLogScroll;
+        private float _timer = 60f;
+        float _timeLeft = 0f;
 
         [MenuItem("TheBlackArms/Scene AutoSave", false, 500)]
         private static void Init()
@@ -58,16 +58,16 @@ namespace AutoSaver
 
         public void OnGUI()
         {
-            EditorGUILayout.LabelField("Time:", Timer + " Secs");
-            int timeToSave = (int)(TimeLeft - EditorApplication.timeSinceStartup);
+            EditorGUILayout.LabelField("Time:", _timer + " Secs");
+            int timeToSave = (int)(_timeLeft - EditorApplication.timeSinceStartup);
             EditorGUILayout.LabelField("time left:", timeToSave.ToString() + " Sec");
             this.Repaint();
-            if (EditorApplication.timeSinceStartup > TimeLeft)
+            if (EditorApplication.timeSinceStartup > _timeLeft)
             {
                 string[] path = EditorApplication.currentScene.Split(char.Parse("/"));
                 path[path.Length - 1] = "AutoSave_" + path[path.Length - 1];
                 EditorApplication.SaveScene(string.Join("/", path), true);
-                TimeLeft = (int)(EditorApplication.timeSinceStartup + Timer);
+                _timeLeft = (int)(EditorApplication.timeSinceStartup + _timer);
             }
 
 
@@ -120,7 +120,7 @@ namespace AutoSaver
             GUILayout.EndHorizontal();
             GUILayout.Space(0);
 
-            changeLogScroll = GUILayout.BeginScrollView(changeLogScroll);
+            _changeLogScroll = GUILayout.BeginScrollView(_changeLogScroll);
             GUILayout.EndScrollView();
 
             GUILayout.FlexibleSpace();

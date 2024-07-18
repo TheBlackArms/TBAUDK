@@ -21,18 +21,18 @@ namespace TheBlackArms
         //get version from server
         private static string _versionURL = "https://c0dera.in/tbaudk/api/version.txt";
         //get download url
-        private static string _unitypackageUrl = "https://c0dera.in/tbaudk/api/assets/latest/TBAUDK.unitypackage"; //TBAUDK
+        private static string _unitypackageUrl = "https://c0dera.in/tbaudk/api/assets/latest/TBAUDK.unitypackage"; //This fucker is case sensitive... LMAO it took me 3 updates to figure it out
 
         //GetVersion
         private static string _currentVersion = File.ReadAllText("Packages/dev.runaxr.tbaudk/TBAUDKUpdater/editor/TBAUDKVersion.txt");
 
 
         //select where to be imported (TBAUDK)
-        public static string AssetPath = "Assets\\";
+        public static string AssetPath = "Assets\\"; //We put the unitypackage here temporarily
         //Custom name for downloaded unitypackage
-        public static string AssetName = "tbaudk.unitypackage";
+        private static string _assetName = "tbaudk.unitypackage"; //We name it this because yes
         //gets Toolkit Directory Path
-        private static string _toolkitPath = "Packages\\TBAUDK\\";
+        private static string _toolkitPath = "Packages\\TBAUDK\\"; //This is the directory so the updater can kaboom the old files
         public async static void AutomaticTbaudkInstaller()
         {
             //Starting Browser
@@ -113,7 +113,7 @@ namespace TheBlackArms
                             EditorUtility.DisplayDialog("Error Deleting Toolset", ex.Message, "Okay");
                         }
                     }
-                    catch //catch nothing because removing this breaks it... wtf even lmao
+                    catch //catch nothing because removing this breaks it... would remove this if it didn't break shit
                     {
                     }
                 }
@@ -133,7 +133,7 @@ namespace TheBlackArms
                 w.DownloadFileCompleted += new AsyncCompletedEventHandler(FileDownloadComplete);
                 w.DownloadProgressChanged += FileDownloadProgress;
                 string url = _unitypackageUrl;
-                w.DownloadFileAsync(new Uri(url), AssetName);
+                w.DownloadFileAsync(new Uri(url), _assetName);
             }
         }
 
@@ -148,8 +148,8 @@ namespace TheBlackArms
             }
             else
             {
-                EditorUtility.DisplayProgressBar("Download of " + AssetName,
-                    "Downloading " + AssetName + " " + progress + "%",
+                EditorUtility.DisplayProgressBar("Download of " + _assetName,
+                    "Downloading " + _assetName + " " + progress + "%",
                     (progress / 100F));
             }
         }
@@ -161,7 +161,7 @@ namespace TheBlackArms
             {
                 TheBlackArmsLog("Download completed!");
                 //Opens .unitypackage
-                Process.Start(AssetName);
+                Process.Start(_assetName);
             }
             else
             {

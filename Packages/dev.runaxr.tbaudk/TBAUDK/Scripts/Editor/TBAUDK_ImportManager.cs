@@ -7,62 +7,62 @@ using UnityEngine;
 
 namespace TheBlackArms
 {
-    public class TheBlackArms_ImportManager
+    public class TheBlackArmsImportManager
     {
         private const string V = "https://c0dera.in/tbaudk/api/assets/";
-        public static string configName = "importConfig.json";
-        public static string serverUrl = V;
-        public static string internalServerUrl = V;
+        public static string ConfigName = "importConfig.json";
+        public static string ServerUrl = V;
+        private static string _internalServerUrl = V;
 
-        public static void downloadAndImportAssetFromServer(string assetName)
+        public static void DownloadAndImportAssetFromServer(string assetName)
         {
-            if (File.Exists(TheBlackArms_Settings.getAssetPath() + assetName))
+            if (File.Exists(TheBlackArmsSettings.GetAssetPath() + assetName))
             {
                 TheBlackArmsLog(assetName + " exists. Importing it..");
-                importDownloadedAsset(assetName);
+                ImportDownloadedAsset(assetName);
             }
             else
             {
                 TheBlackArmsLog(assetName + " does not exist. Starting download..");
-                downloadFile(assetName);
+                DownloadFile(assetName);
             }
         }
 
-        private static void downloadFile(string assetName)
+        private static void DownloadFile(string assetName)
         {
             WebClient w = new WebClient();
             w.Headers.Set(HttpRequestHeader.UserAgent, "Webkit Gecko wHTTPS (Keep Alive 55)");
             w.QueryString.Add("assetName", assetName);
-            w.DownloadFileCompleted += fileDownloadCompleted;
-            w.DownloadProgressChanged += fileDownloadProgress;
-            string url = serverUrl + assetName;
-            w.DownloadFileAsync(new Uri(url), TheBlackArms_Settings.getAssetPath() + assetName);
+            w.DownloadFileCompleted += FileDownloadCompleted;
+            w.DownloadProgressChanged += FileDownloadProgress;
+            string url = ServerUrl + assetName;
+            w.DownloadFileAsync(new Uri(url), TheBlackArmsSettings.GetAssetPath() + assetName);
         }
 
-        public static void deleteAsset(string assetName)
+        public static void DeleteAsset(string assetName)
         {
-            File.Delete(TheBlackArms_Settings.getAssetPath() + assetName);
+            File.Delete(TheBlackArmsSettings.GetAssetPath() + assetName);
         }
 
-        public static void updateConfig()
+        public static void UpdateConfig()
         {
             WebClient w = new WebClient();
             w.Headers.Set(HttpRequestHeader.UserAgent, "Webkit Gecko wHTTPS (Keep Alive 55)");
-            w.DownloadFileCompleted += configDownloadCompleted;
-            w.DownloadProgressChanged += fileDownloadProgress;
-            string url = internalServerUrl + configName;
-            w.DownloadFileAsync(new Uri(url), TheBlackArms_Settings.projectConfigPath + "update_" + configName);
+            w.DownloadFileCompleted += ConfigDownloadCompleted;
+            w.DownloadProgressChanged += FileDownloadProgress;
+            string url = _internalServerUrl + ConfigName;
+            w.DownloadFileAsync(new Uri(url), TheBlackArmsSettings.ProjectConfigPath + "update_" + ConfigName);
         }
 
-        private static void configDownloadCompleted(object sender, AsyncCompletedEventArgs e)
+        private static void ConfigDownloadCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Error == null)
             {
                 //var updateFile = File.ReadAllText(TheBlackArms_Settings.projectConfigPath + "update_" + configName);
-                File.Delete(TheBlackArms_Settings.projectConfigPath + configName);
-                File.Move(TheBlackArms_Settings.projectConfigPath + "update_" + configName,
-                    TheBlackArms_Settings.projectConfigPath + configName);
-                TheBlackArms_ImportPanel.LoadJson();
+                File.Delete(TheBlackArmsSettings.ProjectConfigPath + ConfigName);
+                File.Move(TheBlackArmsSettings.ProjectConfigPath + "update_" + ConfigName,
+                    TheBlackArmsSettings.ProjectConfigPath + ConfigName);
+                TheBlackArmsImportPanel.LoadJson();
 
                 EditorPrefs.SetInt("TheBlackArms_configImportLastUpdated",
                     (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds());
@@ -74,7 +74,7 @@ namespace TheBlackArms
             }
         }
 
-        private static void fileDownloadCompleted(object sender, AsyncCompletedEventArgs e)
+        private static void FileDownloadCompleted(object sender, AsyncCompletedEventArgs e)
         {
             string assetName = ((WebClient)sender).QueryString["assetName"];
             if (e.Error == null)
@@ -83,12 +83,12 @@ namespace TheBlackArms
             }
             else
             {
-                deleteAsset(assetName);
+                DeleteAsset(assetName);
                 TheBlackArmsLog("Download of file " + assetName + " failed!");
             }
         }
 
-        private static void fileDownloadProgress(object sender, DownloadProgressChangedEventArgs e)
+        private static void FileDownloadProgress(object sender, DownloadProgressChangedEventArgs e)
         {
             var progress = e.ProgressPercentage;
             var assetName = ((WebClient)sender).QueryString["assetName"];
@@ -120,7 +120,7 @@ namespace TheBlackArms
             }
 
             TheBlackArmsLog("Updating import config");
-            updateConfig();
+            UpdateConfig();
         }
 
         private static void TheBlackArmsLog(string message)
@@ -128,9 +128,9 @@ namespace TheBlackArms
             Debug.Log("[TheBlackArms] AssetDownloadManager: " + message);
         }
 
-        public static void importDownloadedAsset(string assetName)
+        public static void ImportDownloadedAsset(string assetName)
         {
-            AssetDatabase.ImportPackage(TheBlackArms_Settings.getAssetPath() + assetName, true);
+            AssetDatabase.ImportPackage(TheBlackArmsSettings.GetAssetPath() + assetName, true);
         }
     }
 }

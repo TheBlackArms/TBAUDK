@@ -7,32 +7,32 @@ using UnityEngine;
 namespace TheBlackArms
 {
     [InitializeOnLoad]
-    public class TheBlackArms_Settings : EditorWindow
+    public class TheBlackArmsSettings : EditorWindow
     {
         private const string Url = "https://github.com/TheBlackArms/TBAUDK/";
         private const string Url1 = "https://trigon.systems/";
         private const string Link = "";
         private const string Link1 = "";
 
-        public static string projectConfigPath = "Packages/dev.runaxr.tbaudk/TBAUDK/Configs/";
-        private string backgroundConfig = "BackgroundVideo.txt";
-        private static string projectDownloadPath = "Packages/dev.runaxr.tbaudk/TBAUDK/Assets/";
-        private static GUIStyle ToolkitHeader;
-        public Color TBAUDKColor = Color.red;
+        public static string ProjectConfigPath = "Packages/dev.runaxr.tbaudk/TBAUDK/Configs/";
+        private string _backgroundConfig = "BackgroundVideo.txt";
+        private static string _projectDownloadPath = "Packages/dev.runaxr.tbaudk/TBAUDK/Assets/";
+        private static GUIStyle _toolkitHeader;
+        public Color tbaudkColor = Color.red;
         public static bool UITextRainbow { get; set; }
         //public Gradient TBAUDKGRADIENT;
 
         [MenuItem("TheBlackArms/Settings", false, 501)]
         public static void OpenSplashScreen()
         {
-            GetWindow<TheBlackArms_Settings>(true);
+            GetWindow<TheBlackArmsSettings>(true);
         }
 
-        public static string getAssetPath()
+        public static string GetAssetPath()
         {
             if (EditorPrefs.GetBool("TheBlackArms_onlyProject", false))
             {
-                return projectDownloadPath;
+                return _projectDownloadPath;
             }
 
             var assetPath = EditorPrefs.GetString("TheBlackArms_customAssetPath", "%appdata%/TheBlackArms/")
@@ -55,7 +55,7 @@ namespace TheBlackArms
             maxSize = new Vector2(400, 600);
             minSize = maxSize;
 
-            ToolkitHeader = new GUIStyle
+            _toolkitHeader = new GUIStyle
             {
                 normal =
                 {
@@ -70,16 +70,16 @@ namespace TheBlackArms
                 EditorPrefs.SetBool("TBA_discordRPC", true);
             }
 
-            if (!File.Exists(projectConfigPath + backgroundConfig) || !EditorPrefs.HasKey("TheBlackArms_background"))
+            if (!File.Exists(ProjectConfigPath + _backgroundConfig) || !EditorPrefs.HasKey("TheBlackArms_background"))
             {
                 EditorPrefs.SetBool("TheBlackArms_background", false);
-                File.WriteAllText(projectConfigPath + backgroundConfig, "False");
+                File.WriteAllText(ProjectConfigPath + _backgroundConfig, "False");
             }
         }
 
         public void OnGUI()
         {
-            GUILayout.Box("", ToolkitHeader);
+            GUILayout.Box("", _toolkitHeader);
             GUILayout.Space(4);
             GUI.backgroundColor = new Color(
                 EditorPrefs.GetFloat("TBAUDKColor_R"),
@@ -129,26 +129,26 @@ namespace TheBlackArms
 
             EditorGUI.BeginChangeCheck();
 
-            TBAUDKColor = EditorGUI.ColorField(new Rect(3, 270, position.width - 6, 15), "Kit UI Color", TBAUDKColor);
+            tbaudkColor = EditorGUI.ColorField(new Rect(3, 270, position.width - 6, 15), "Kit UI Color", tbaudkColor);
             //TBAUDKGRADIENT = EditorGUI.GradientField(new Rect(3, 360, position.width - 6, 15), "TBAUDK Gradient", TBAUDKGRADIENT);
 
             if (EditorGUI.EndChangeCheck())
             {
-                EditorPrefs.SetFloat("TBAUDKColor_R", TBAUDKColor.r);
-                EditorPrefs.SetFloat("TBAUDKColor_G", TBAUDKColor.g);
-                EditorPrefs.SetFloat("TBAUDKColor_B", TBAUDKColor.b);
-                EditorPrefs.SetFloat("TBAUDKColor_A", TBAUDKColor.a);
+                EditorPrefs.SetFloat("TBAUDKColor_R", tbaudkColor.r);
+                EditorPrefs.SetFloat("TBAUDKColor_G", tbaudkColor.g);
+                EditorPrefs.SetFloat("TBAUDKColor_B", tbaudkColor.b);
+                EditorPrefs.SetFloat("TBAUDKColor_A", tbaudkColor.a);
             }
 
             EditorGUILayout.Space();
             if (GUILayout.Button("Reset Color"))
             {
-                Color TBAUDKColor = Color.gray;
+                Color tbaudkColor = Color.red;
 
-                EditorPrefs.SetFloat("TBAUDKColor_R", TBAUDKColor.r);
-                EditorPrefs.SetFloat("TBAUDKColor_G", TBAUDKColor.g);
-                EditorPrefs.SetFloat("TBAUDKColor_B", TBAUDKColor.b);
-                EditorPrefs.SetFloat("TBAUDKColor_A", TBAUDKColor.a);
+                EditorPrefs.SetFloat("TBAUDKColor_R", tbaudkColor.r);
+                EditorPrefs.SetFloat("TBAUDKColor_G", tbaudkColor.g);
+                EditorPrefs.SetFloat("TBAUDKColor_B", tbaudkColor.b);
+                EditorPrefs.SetFloat("TBAUDKColor_A", tbaudkColor.a);
             }
 
             //TBAUDKGRADIENT = EditorGUI.GradientField(new Rect(3, 290, position.width - 6, 15), "TBAUDK Gradient", TBAUDKGRADIENT);
@@ -208,7 +208,7 @@ namespace TheBlackArms
             if (enableBackground != isBackgroundEnabled)
             {
                 EditorPrefs.SetBool("TheBlackArms_background", enableBackground);
-                File.WriteAllText(projectConfigPath + backgroundConfig, enableBackground.ToString());
+                File.WriteAllText(ProjectConfigPath + _backgroundConfig, enableBackground.ToString());
             }
 
             GUILayout.EndHorizontal();

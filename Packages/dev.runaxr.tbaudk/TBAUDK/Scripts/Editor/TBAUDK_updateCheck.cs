@@ -4,14 +4,14 @@ using TheBlackArms;
 using UnityEditor;
 using UnityEngine;
 
-public class TheBlackArms_updateCheck : MonoBehaviour
+public class TheBlackArmsUpdateCheck : MonoBehaviour
 {
     [InitializeOnLoad]
     public class Startup
     {
-        public static string versionURL = "https://c0dera.in/TBAUDK/api/version.txt";
+        private static string _versionURL = "https://c0dera.in/TBAUDK/api/version.txt";
 
-        public static string currentVersion =
+        private static string _currentVersion =
             File.ReadAllText("Packages/dev.runaxr.tbaudk/TBAUDKUpdater/Editor/TBAUDKversion.txt");
 
         static Startup()
@@ -19,14 +19,14 @@ public class TheBlackArms_updateCheck : MonoBehaviour
             Check();
         }
 
-        public async static void Check()
+        private async static void Check()
         {
             HttpClient httpClient = new HttpClient();
-            var result = await httpClient.GetAsync(versionURL);
+            var result = await httpClient.GetAsync(_versionURL);
             var strServerVersion = await result.Content.ReadAsStringAsync();
             var serverVersion = strServerVersion;
 
-            var thisVersion = currentVersion;
+            var thisVersion = _currentVersion;
 
             if (serverVersion != thisVersion)
             {
