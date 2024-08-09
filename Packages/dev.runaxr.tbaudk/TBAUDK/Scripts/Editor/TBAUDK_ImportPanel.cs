@@ -31,7 +31,7 @@ namespace TheBlackArms
         {
             titleContent = new GUIContent("TBAUDK Main Importer");
 
-            TheBlackArmsImportManager.checkForConfigUpdate();
+            TheBlackArmsImportManager.CheckForConfigUpdate();
             LoadJson();
 
             maxSize = new Vector2(_sizeX, _sizeY);

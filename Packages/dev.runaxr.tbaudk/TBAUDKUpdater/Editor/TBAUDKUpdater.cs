@@ -70,7 +70,7 @@ namespace TheBlackArms
             }
         }
 
-        public static async Task DownloadTheBlackArms()
+        private static async Task DownloadTheBlackArms()
         {
             TheBlackArmsLog("Asking for Approval..");
             if (EditorUtility.DisplayDialog("TheBlackArms Updater", "Your Version (V" + _currentVersion.ToString() + ") is Outdated!" + " do you want to Download and Import the Newest Version?", "Yes", "No"))
@@ -85,7 +85,7 @@ namespace TheBlackArms
             }
         }
 
-        public static async Task DeleteAndDownloadAsync()
+        private static async Task DeleteAndDownloadAsync()
         {
             try
             {

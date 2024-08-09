@@ -85,18 +85,6 @@
             "name": "FACS Utilities",
             "file": "FACS.unitypackage"
         },
-        "BToolbox": {
-            "name": "BUDDYWORKS Toolbox",
-            "file": "BToolbox.unitypackage"
-        },
-        "BEditorTools": {
-            "name": "BUDDYWORKS EditorTools",
-            "file": "BEditorTools.unitypackage"
-        },
-        "BAvatarDynamics": {
-            "name": "BUDDYWORKS Avatar Dynamics (VRCSDK)",
-            "file": "BAvatarDynamics.unitypackage"
-        },
 
         "AvatarAddons": {
             "name": "\nAvatar Addons"
@@ -109,11 +97,6 @@
             "name": "BUDDYWORKS Pose Extension (VRCFURY)",
             "file": "BPoseExtension.unitypackage"
         },
-        "BAvatarScene": {
-            "name": "BUDDYWORKS Avatar Scene",
-            "file": "BAvatarScene.unitypackage"
-        },
-
         "WorldAddons": {
             "name": "\nWorld Addons"
         },

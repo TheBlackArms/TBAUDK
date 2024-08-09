@@ -105,7 +105,7 @@ namespace TheBlackArms
             }
         }
 
-        public static void checkForConfigUpdate()
+        public static void CheckForConfigUpdate()
         {
             if (EditorPrefs.HasKey("TheBlackArms_configImportLastUpdated"))
             {
@@ -128,7 +128,7 @@ namespace TheBlackArms
             Debug.Log("[TheBlackArms] AssetDownloadManager: " + message);
         }
 
-        public static void ImportDownloadedAsset(string assetName)
+        private static void ImportDownloadedAsset(string assetName)
         {
             AssetDatabase.ImportPackage(TheBlackArmsSettings.GetAssetPath() + assetName, true);
         }
